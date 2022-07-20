@@ -1,0 +1,14 @@
+{
+    "require": {
+        "php": "^7.4",
+        "rakit/validation": "^1.4",
+        "twig/twig": "3.3.4",
+        "vlucas/phpdotenv": "v2.6.9",
+        "ext-pdo": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "App"
+        }
+    }
+}

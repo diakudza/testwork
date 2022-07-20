@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  webserver:
+    build:
+      context: ./docker/${WEBSERVER}
+    container_name: "${WEBSERVER}"
+    restart: "on-failure"
+    ports:
+      - "${WEBSERVER_PORT}:${WEBSERVER_PORT}"
+      - "${WEBSERVER_PORT_SSL}:${WEBSERVER_PORT_SSL}"
+    links:
+      - mysql
+    volumes:
+      - ${DOCUMENT_ROOT}:/var/www/html
+      - ${PHP_INI}:/usr/local/etc/php/php.ini
+      - ${VHOSTS_DIR}:/etc/apache2/sites-enabled
+      - ${APACHE_LOG_DIR}:/var/log/apache2
+  mysql:
+    build:
+      context: "./docker/${DATABASE}"
+    container_name: "${DATABASE}"
+    restart: "on-failure"
+    ports:
+      - "${MYSQL_PORT}:${MYSQL_PORT}"
+    volumes:
+      - ${MYSQL_DATA_DIR}:/var/lib/mysql
+      - ${MYSQL_LOG_DIR}:/var/log/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
