@@ -1,7 +1,17 @@
 <!DOCTYPE html>
 <html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.tailwindcss.com"></script>
 <body>
-    <div>{{ data.message }}</div>
-    {{ include( template , {page: page, userLogin: userLogin, role:role}) }}
+<div class="px-3">
+    {% if data.message %}
+        <div class="mb-1 bg-red-400">{{ data.message }}</div>
+    {% endif %}
+    {% if data.name %}
+        <div class="mb-2">Пользователь: {{ data.name }}</div>
+    {% endif %}
+    {{ include( template , {photo: data.photo}) }}
+</div>
 </body>
 </html>

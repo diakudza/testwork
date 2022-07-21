@@ -11,7 +11,6 @@ class View
             [
                 'page' => $page,
                 'template' => $page . '.twig',
-                'userLogin' => $data['userLogin'] ?? $data['userLogin'] ?? 'guest',
                 'data' => $data,
             ]);
     }

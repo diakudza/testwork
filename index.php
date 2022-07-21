@@ -12,6 +12,7 @@ const BASE_URL = '/index';
 const BASE_SPACE = '\App';
 const CONTROLLERS_SPACE = '\Controllers\\';
 const MODELS_SPACE = '\Models\\';
+const SESSION_TIMEOUT = 3600 ; //seconds
 define("DB_DRIVER", getenv('DATABASE'));
 define("DB_HOST", getenv('MYSQL_HOST'));
 define("DB_NAME", getenv('MYSQL_DATABASE'));

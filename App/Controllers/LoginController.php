@@ -2,8 +2,10 @@
 
 namespace App\Controllers;
 
+use App\Classes\Redirect;
 use App\Classes\User;
 use App\Controllers\Validate\LoginValidateClass;
+use http\Header;
 
 class LoginController extends Controller
 {
@@ -23,15 +25,16 @@ class LoginController extends Controller
         if ( !isset($validated['name'])) {
             $this->view->generate('LoginForm',['message' => 'Введенное значение не валидно!']);
         } else {
-            User::loginFromRequest($validated['name'],$validated['password']);
-            $this->view->generate('index',['message' => 'вы вошли!']);
+            $user = User::loginFromRequest($validated['name'],$validated['password']);
+            Redirect::to('',"вы вошли!");
         }
-
     }
 
     public function action_signout()
     {
+
         User::logout();
-        $this->view->generate('LoginForm',);
+        Redirect::to();
+        $this->view->generate("index");
     }
 }

@@ -1,7 +1,9 @@
-форма логина
+<div class="container mx-auto flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-">
+    <p>форма логина</p>
 
-<form method="post" action="/login/signin">
-    <input type="text" name="name">
-    <input type="password" name="password">
-    <button type="submit">LOGIN</button>
-</form>
+    <form  action="/login/signin" method="post" class="mt-8 space-y-6">
+        <input class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" type="text" name="name">
+        <input class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" type="password" name="password">
+        <button type="submit">LOGIN</button>
+    </form>
+</div>

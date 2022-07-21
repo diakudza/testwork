@@ -1,2 +1,11 @@
-Главная старница
-<a href="/login/signout">Выход</a>
+<div class="flex flex-row justify-between">
+    <p class="">Главная старница</p><a href="/login/signout">Выход</a>
+</div>
+
+<div class="container mx-auto" method="post">
+    ТУТ массив картинок!
+
+    {% for item in photo %}
+     1   {{ item }}
+    {% endfor %}
+</div>
