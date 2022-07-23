@@ -30,7 +30,7 @@ class CommentController extends Controller
             Redirect::back('У нас запрещены слова: Лес, Поляна, Озеро');
             return;
         }
-        $this->comment->addCommentToPhoto((int)$_POST['photo_id'], (int)$_POST['user_id'], $_POST['comment_text'],);
+        $this->model->addCommentToPhoto((int)$_POST['photo_id'], (int)$_POST['user_id'], $_POST['comment_text'],);
         Redirect::back('Комментарий добавлен');
     }
 
@@ -41,7 +41,7 @@ class CommentController extends Controller
         User::checkTimeForEditComment($_SESSION['user_id'], (int)$this->parametrs);
         $this->view->generate('CommentEditForm',
             [
-                'comments' => $this->comment->getCommentsById((int)$this->parametrs),
+                'comments' => $this->model->getCommentsById((int)$this->parametrs),
                 'user' => $_SESSION['user_id'],
                 'message' => $_SESSION['message']
             ]);
@@ -54,7 +54,7 @@ class CommentController extends Controller
             Redirect::back('У нас запрещены слова: Лес, Поляна, Озеро');
             return;
         }
-        if ($this->comment->updateComment((int)$_POST['comment_id'], $_POST['comment_text'])) {
+        if ($this->model->updateComment((int)$_POST['comment_id'], $_POST['comment_text'])) {
             Redirect::to('photo/show/' . $_POST['photo_id'], 'Комментарий обновлен');
         } else {
             Redirect::to('photo/show/' . $_POST['photo_id'],'Ошибка обновления комментарий');
@@ -65,7 +65,7 @@ class CommentController extends Controller
     public function action_delete()
     {
         User::redirectIfNoAuth('Доступ к комметариям, только для зарегистрированных пользовелей');
-        $q = $this->comment->deleteCommentById((int)$this->parametrs);
+        $q = $this->model->deleteCommentById((int)$this->parametrs);
         if (!$q) {
             Redirect::back('Ошибка удаления комментария! Возможно такого комментария уже нет!');
             return;
@@ -79,7 +79,7 @@ class CommentController extends Controller
 
         $this->view->generate('CommentsHistory',
             [
-                'comments' => $this->comment->getCommentHistoruById((int)$this->parametrs),
+                'comments' => $this->model->getCommentHistoryById((int)$this->parametrs),
             ]);
 
     }

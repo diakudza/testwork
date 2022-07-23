@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Classes;
+namespace App\Models;
 
+use App\Classes\DB;
+use App\Classes\ThumbClass;
 use App\Controllers\Validate\UploadValidateClass;
 
-class PhotoClass
+class PhotoModel extends Model
 {
     public function getArrayOfPhoto(): array
     {

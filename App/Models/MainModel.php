@@ -2,10 +2,7 @@
 
 namespace App\Models;
 
-class MainModel extends Model
+class MainModel extends PhotoModel
 {
-    public function getComments()
-    {
 
-    }
 }

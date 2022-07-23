@@ -80,8 +80,9 @@ class User
 
     public function logout()
     {
+        $q = DB::on()->prepare("UPDATE Users SET session_start = null WHERE user_id = :user_id");
+        $q->execute(['user_id' => $_SESSION['user_id']]);
         session_start();
-
         if (isset($_SESSION['name'])) {
             session_unset();
             session_destroy();
@@ -141,7 +142,6 @@ class User
         if ((strtotime($q['created_at']) + 60 * 3) - time() < 0) {
             if ($q['file_name'] == $file && (strtotime($q['created_at']) + 60 * 15) - time() < 0) {
                 Redirect::back('Добавление одинаковых изображений доступно раз в 15 минуты');
-
             }
         } else {
             Redirect::back('Добавление изображений доступно раз в 3 минуты');
