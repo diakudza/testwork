@@ -9,6 +9,7 @@ $dotenv = new Dotenv\Dotenv($_SERVER['DOCUMENT_ROOT']);
 $dotenv->load();
 
 const BASE_URL = '/index';
+const BASE_DIR = __DIR__;
 const BASE_SPACE = '\App';
 const CONTROLLERS_SPACE = '\Controllers\\';
 const MODELS_SPACE = '\Models\\';

@@ -36,6 +36,7 @@ class User
         session_start();
         $_SESSION['session_start'] = $user->cred['session_start'];
         $_SESSION['name'] = $user->cred['email'];
+        $_SESSION['user_id'] = $user->cred['id'];
         return $user;
     }
 
@@ -90,6 +91,14 @@ class User
         }
     }
 
+    public function redirectIfNoAuth($message)
+    {
+        session_start();
+        if (!isset($_COOKIE['name']) || !isset($_SESSION['name'])) {
+            Redirect::to('', $message);
+        }
+    }
+
     public function checkSessionExpired()
     {
         if ($_SESSION['session_start']) {
@@ -99,4 +108,26 @@ class User
             }
         }
     }
+
+    public function checkIsUserComment($user_id, $comment_id)
+    {
+        if ($user_id != $comment_id) {
+            Redirect::back('вы не можете удалить чужой комментарий');
+        }
+    }
+
+    public function checkTimeForEditComment($user_id, $comment_id)
+    {
+        $q = DB::on()->prepare("SELECT created_at FROM Comments WHERE comment_id = :id AND user_id = :user_id");
+        $q->execute([
+            'id' => $comment_id,
+            'user_id' => $user_id,
+            ]);
+        $q = $q->fetch();
+        if ((strtotime($q['created_at']) + 60*5) - time() < 0) {
+            Redirect::back('Редактирование комментариев доступно только втечении 5 минут');
+        }
+    }
+
+
 }

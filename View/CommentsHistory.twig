@@ -1,0 +1,10 @@
+<div class="flex flex-row justify-between">
+    <p class="">Стрaница истории редактирования комметария: </p><a href="/login/signout">Выход</a>
+</div>
+<div class="container mx-auto" method="post">
+    <div class="flex flex-col">
+    {% for item in data.comments %}
+        <div>изменено: {{ item['created_at'] }} , Текст: {{ item['text'] }}</div>
+    {% endfor %}
+    </div>
+</div>

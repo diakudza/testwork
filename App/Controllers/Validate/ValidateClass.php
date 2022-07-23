@@ -6,9 +6,9 @@ use Rakit\Validation\Validator;
 
 class ValidateClass
 {
-    public $validator;
+    public Validator $validator;
 
-    public function vaildate()
+    public function __construct()
     {
         $this->validator = new Validator;
     }

@@ -1,0 +1,17 @@
+{% include 'ComponentHeader.twig' with {'page': 'комментария'}%}
+
+<div class="container mx-auto flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-">
+    <p>Реадактирование Вашего комментария</p>
+    <form action="/comment/update" method="post" class="mt-8 space-y-6">
+        <input type="hidden" value="{{ data.comments[0]['photo_id'] }}" name="photo_id">
+        <input type="hidden" value="{{ data.comments[0]['comment_id'] }}" name="comment_id">
+        <input class="border border-gray-300 text-gray-900" value="{{ data.comments[0]['text'] }}" type="text" name="comment_text">
+        <button type="submit">
+            <svg class="h-5 w-5 text-black"
+            <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>
+            </svg>
+        </button>
+    </form>
+</div>

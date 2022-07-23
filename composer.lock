@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "dee209617ca676d74c73e38d34991505",
+    "content-hash": "024d138dfff2f458f5ca64c79f73cca7",
     "packages": [
         {
             "name": "rakit/validation",
@@ -378,7 +378,8 @@
     "prefer-lowest": false,
     "platform": {
         "php": "^7.4",
-        "ext-pdo": "*"
+        "ext-pdo": "*",
+        "ext-gd": "7.*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.3.0"

@@ -1,0 +1,57 @@
+{% include 'ComponentHeader.twig' with {'page': 'ФОТО'}%}
+<div class="container mx-auto " method="post">
+    <div class="flex flex-row justify-between max-h-[800px]">
+        <div>
+            <p class="text-xs">Имя файла: {{ photo['file_name'] }}, Автор: {{ photo['email'] }}, Дата
+                добавления: {{ photo['created_at'] }}.</p>
+            <div class="flex">
+                <img src="/Storage/image/{{ photo['file_name'] }}">
+            </div>
+        </div>
+        <div class="max-h-full overflow-scroll">
+            <p>Комментарии:</p>
+
+            {% for comment in data.comments %}
+
+                <div class="flex flex-row overflow-hidden	">
+                    <div>
+                        <p>{{ comment['email'] }} </p>
+                        <p class="text-xs">Дата: {{ comment['created_at'] }} </p>
+                        {{ comment['text'] }}
+                        {% if comment['comment_is_edited'] %}
+                            <div><a href="/comment/history/{{ comment['comment_id'] }}" >[EDITED]</a></div>
+                        {% endif %}
+                    </div>
+                    {% if comment['user_id'] == data.user %}
+                        <a href="/comment/delete/{{ comment['comment_id'] }}">
+                            <svg class="h-8 w-8 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </a>
+                        <a href="/comment/edit/{{ comment['comment_id'] }}">
+                            <svg class="h-8 w-8 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                            </svg>
+                        </a>
+                    {% endif %}
+
+                </div>
+
+                <hr>
+            {% endfor %}
+        </div>
+    </div>
+    <hr>
+
+    <form action="/comment/add" method="POST">
+        <input type="hidden" value="{{ photo['photo_id'] }}" name="photo_id">
+        <input type="hidden" value="{{ data.user }}" name="user_id">
+        <input type="text" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300
+        placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500
+        focus:border-indigo-500 focus:z-10 sm:text-sm"  name="comment_text" placeholder="Ваш комментарий">
+        <button type="submit">Комментировать</button>
+    </form>
+
+</div>

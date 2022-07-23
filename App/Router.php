@@ -22,9 +22,9 @@ class Router
         if (!empty($routes[2]))
             $action_name = $routes[2];
         if (!empty($routes[3]))
-            $id = $routes[3];
+            $parametrs = $routes[3];
         $method = $_SERVER['REQUEST_METHOD'];
-        $modelWithNameSpace = BASE_SPACE . MODELS_SPACE .  $controller_name . 'Model';
+        $modelWithNameSpace = BASE_SPACE . MODELS_SPACE . $controller_name . 'Model';
         if (file_exists(__DIR__ . "/Models/" . $controller_name . 'Model.php')) {
             $model = new $modelWithNameSpace;
         }
@@ -35,10 +35,10 @@ class Router
                 $controller_name = $controller_name . 'Controller';
                 $action_name = 'action_' . $action_name;
                 $controller_file = BASE_SPACE . CONTROLLERS_SPACE . $controller_name;
-                $controller = new $controller_file($model, $method);
+                $controller = new $controller_file($model, $parametrs, $method);
                 $controller->$action_name();
             } catch (ExcSessionTimeOut $e) {
-                echo "таймоут сессии";
+                echo "таймаут сессии";
             } catch (Exception $e) {
                 echo "что-то пошло не так";
             }

@@ -1,0 +1,7 @@
+<div class="flex flex-row justify-between">
+    <p class="">Страница {{ page }}</p><a href="/login/signout">Выход</a>
+</div>
+
+{% if arrow != 'no' %}
+    {% include 'ComponentHeaderBackArrow.twig' %}
+{% endif %}

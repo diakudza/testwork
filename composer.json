@@ -4,7 +4,8 @@
         "rakit/validation": "^1.4",
         "twig/twig": "3.3.4",
         "vlucas/phpdotenv": "v2.6.9",
-        "ext-pdo": "*"
+        "ext-pdo": "*",
+        "ext-gd": "7.*"
     },
     "autoload": {
         "psr-4": {
