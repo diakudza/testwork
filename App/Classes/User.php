@@ -122,12 +122,30 @@ class User
         $q->execute([
             'id' => $comment_id,
             'user_id' => $user_id,
-            ]);
+        ]);
         $q = $q->fetch();
-        if ((strtotime($q['created_at']) + 60*5) - time() < 0) {
+        if ((strtotime($q['created_at']) + 60 * 5) - time() < 0) {
             Redirect::back('Редактирование комментариев доступно только втечении 5 минут');
         }
     }
 
+    public function checkTimeForUploadPhoto(int $user_id, string $file)
+    {
+        $q = DB::on()->prepare("SELECT file_name, created_at FROM Photo WHERE file_name = :file_name AND user_id = :user_id ORDER BY created_at DESC ");
+        $q->execute([
+            'file_name' => $file,
+            'user_id' => $user_id,
+        ]);
+        $q = $q->fetch();
+
+        if ((strtotime($q['created_at']) + 60 * 3) - time() < 0) {
+            if ($q['file_name'] == $file && (strtotime($q['created_at']) + 60 * 15) - time() < 0) {
+                Redirect::back('Добавление одинаковых изображений доступно раз в 15 минуты');
+
+            }
+        } else {
+            Redirect::back('Добавление изображений доступно раз в 3 минуты');
+        }
+    }
 
 }

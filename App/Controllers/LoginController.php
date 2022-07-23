@@ -11,7 +11,7 @@ class LoginController extends Controller
 {
     public function action_index()
     {
-        $this->view->generate('LoginForm');
+        $this->view->generate('PageLoginForm');
     }
     public function action_signin()
     {
@@ -23,7 +23,7 @@ class LoginController extends Controller
         }
 
         if ( !isset($validated['name'])) {
-            $this->view->generate('LoginForm',['message' => 'Введенное значение не валидно!']);
+            $this->view->generate('PageLoginForm',['message' => 'Введенное значение не валидно!']);
         } else {
             $user = User::loginFromRequest($validated['name'],$validated['password']);
             Redirect::to('',"вы вошли!");

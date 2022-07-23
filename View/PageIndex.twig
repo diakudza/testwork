@@ -1,0 +1,9 @@
+{% include 'ComponentHeader.twig' with {'page': 'главная', 'arrow': 'no'}%}
+<div class="container mx-auto flex flex-col justify-around" method="post">
+    <div class="flex flex-row justify-around flex-wrap	">
+        {% for item in data.photo %}
+            {% include 'ComponentCart.twig' %}
+        {% endfor %}
+    </div>
+    {% include 'ComponentAddPhotoForm.twig' %}
+</div>

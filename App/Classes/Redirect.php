@@ -19,6 +19,7 @@ class Redirect
         }
         $host = 'http://' . $_SERVER['HTTP_HOST'] . '/';
         header('Location:' . $host . $url);
+        exit();
     }
 
     public function back($message = null)
@@ -26,5 +27,6 @@ class Redirect
         session_start();
         $_SESSION['message'] = $message;
         header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit();
     }
 }

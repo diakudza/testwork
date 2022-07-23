@@ -2,10 +2,10 @@
 <div class="container mx-auto " method="post">
     <div class="flex flex-row justify-between max-h-[800px]">
         <div>
-            <p class="text-xs">Имя файла: {{ photo['file_name'] }}, Автор: {{ photo['email'] }}, Дата
+            <p class="text-xs">Имя файла: {{ photo['server_file_name'] }}, Автор: {{ photo['email'] }}, Дата
                 добавления: {{ photo['created_at'] }}.</p>
             <div class="flex">
-                <img src="/Storage/image/{{ photo['file_name'] }}">
+                <img src="/Storage/image/{{ photo['server_file_name'] }}">
             </div>
         </div>
         <div class="max-h-full overflow-scroll">

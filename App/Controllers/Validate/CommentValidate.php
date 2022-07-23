@@ -15,7 +15,8 @@ class CommentValidate extends ValidateClass
 
     public function checkForStopWords(string $sting, array $arr = ['лес', 'поляна', 'озеро'])
     {
-        $stringToArray = array_map('strtolower', explode(" ", $sting));
+        $str = preg_replace('/[^a-zA-Zа-яА-Я ]/iu', '', $sting);
+        $stringToArray = array_map('strtolower', explode(" ", $str));
         foreach ($stringToArray as $word) {
             if (in_array(mb_strtolower($word), $arr))  {
                 return true;
